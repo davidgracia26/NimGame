@@ -2,212 +2,81 @@ var a = 5;
 var b = 5;
 var c = 5;
 
-console.log("a: " + a)
-console.log("b: " + b)
-console.log("c: " + c)
+var pickArray = [a, b, c];
 
-
-alert("a: " + a + " b: " + b + " c: " + c)
-
-while ((a >= 0) && (b >= 0) && (c >= 0)) {
-  var gameEnter = prompt("Enter a pile and letter (a3,b2,etc.)");
-  var gameEnter1 = gameEnter.split("");
-  console.log(gameEnter1);
-  var pan = parseInt(gameEnter1[1]);
-  console.log(pan);
-
-
-
-
-if (gameEnter1[0] === "a") {
-
-  var a = a - pan;
-  console.log("a: " + a);
-  console.log("b: " + b);
-  console.log("c: " + c);
-
-alert("a: " + a + " b: " + b + " c: " + c);
-
-if (((a === 0) && (c === 0)) || ((a === 0) && (b === 0))) {
-  alert("Computer Wins!")
-  break
-}
-
-if (a === 0){
-  var min = 0;
-  var max = b;
-  if (b === 0){
-    var min = 0;
-    var max = c;
-    var c = c - c;
-    alert("a: " + a + " b: " + b + " c: " + c);
-  } else{
-  var b = b - b
-  alert("a: " + a + " b: " + b + " c: " + c);
-  if ((a === 0) && (b === 0)) {
-    alert("You Win!");
-    break
-  }
-}
-}
-var min = 0
-var max = a
-
-var a = a - a
-alert("a: " + a + " b: " + b + " c: " + c);
-
-if (((a === 0) && (b === 0)) || ((a === 0) && (c === 0))) {
-  alert("You Win!")
-  break
-}
-}
-
-  if (a < 0) {
-
-  var remove2 = prompt("Remove a smaller amount");
-  var remove3 = parseInt(remove2);
-  var newA = a + pan;
-  alert(newA);
-  console.log("a: " + newA);
-  var a = newA - remove3;
-  alert("a: " + a + " b: " + b + " c: " + c);
-  console.log("a: " + a);
-
-  if ((a === 0) && (b === 0) && (c == 0)) {
-    alert("You Win!");
-    break
-  }
-}
-
-  if (gameEnter1[0] === "b") {
-
-    var b = b - pan;
-    console.log("a: " + a);
-    console.log("b: " + b);
-    console.log("c: " + c);
-
-    alert("a: " + a + " b: " + b + " c: " + c);
-
-    if (((a === 0) && (b === 0)) || ((b === 0) && (c === 0))) {
-      alert("Computer Wins!")
-      break
-    }
-
-    if (b === 0){
-      var min = 0;
-      var max = a;
-      if (a === 0){
-        var min = 0;
-        var max = c;
-        var c = c - c;
-        alert("a: " + a + " b: " + b + " c: " + c);
-      } else{
-      var a = a - a;
-      alert("a: " + a + " b: " + b + " c: " + c);
-      if ((a === 0) && (b === 0)) {
-        alert("You Win!");
+var gameOver = false;
+while (gameOver == false) {
+    playerMove();
+    checkIfGameOver();
+    if (gameOver == true) {
+        alert("You win");
         break
-      }
     }
-    }
-    var min = 0
-    var max = b
-
-    var b = b - b
-
-    alert("a: " + a + " b: " + b + " c: " + c);
-
-    if (((a === 0) && (b === 0)) || ((b === 0) && (c === 0))) {
-      alert("You Win!")
-      break
-    }
-  }
-
-    if (b < 0) {
-
-    var remove2 = prompt("Remove a smaller amount");
-    var remove3 = parseInt(remove2);
-    var newB = b + pan;
-    alert(newB);
-    console.log("b: " + newA);
-    var b = newB - remove3;
-    alert("a: " + a + " b: " + b + " c: " + c);
-    console.log("b: " + b);
-    if ((a === 0) && (b === 0) && c == 0) {
-      alert("You Win!");
-      break
-    }
-  }
-
-
-    if (gameEnter1[0] === "c") {
-
-      var c = c - pan;
-      console.log("a: " + a);
-      console.log("b: " + b);
-      console.log("c: " + c);
-
-      alert("a: " + a + " b: " + b + " c: " + c);
-
-      if (((a === 0) && (c === 0)) || ((b === 0) && (c === 0))) {
-        alert("Computer Wins!")
+    computerMove();
+    checkIfGameOver();
+    if (gameOver == true) {
+        alert("Computer Wins");
         break
-      }
+    }
+}
 
-      if (c === 0){
-        var min = 0;
-        var max = a;
-        if (a === 0){
-          var min = 0;
-          var max = a;
-          var a = a - a;
-          alert("a: " + a + " b: " + b + " c: " + c);
-        } else{
-        var a = a - a;
-        alert("a: " + a + " b: " + b + " c: " + c);
-        if ((a === 0) && (c === 0)) {
-          alert("You Win!");
-          break
+function playerMove() {
+
+    var move = prompt(`Enter a pile and letter (a3,b2,etc.) --- Current pile count: a:${pickArray[0]} b:${pickArray[1]} c: ${pickArray[2]}`);
+    var remove = parseInt(move[1]);
+    if (move == "") {
+        alert("Remove a different amount");
+        playerMove();
+    } else if (move[0] == "A" || move[0] == "a") {
+
+        if (pickArray[0] - remove < 0 || remove <= 0) {
+            alert("Remove a different amount");
+            playerMove();
+        } else {
+            pickArray[0] = pickArray[0] - remove;
         }
-      }
-      }
-      var min = 0
-      var max = c
+    } else if (move[0] == "B" || move[0] == "b") {
 
-      var c = c - c
+        if (pickArray[1] - remove < 0 || remove <= 0) {
+            alert("Remove a different amount");
+            playerMove();
+        } else {
+            pickArray[1] = pickArray[1] - remove;
+        }
 
-      alert("a: " + a + " b: " + b + " c: " + c);
+    } else if (move[0] == "C" || move[0] == "c") {
 
-      if (((a === 0) && (c === 0)) || ((b === 0) && (c === 0))) {
-        alert("You Win!")
-        break
-      }
-
+        if (pickArray[2] - remove < 0 || remove <= 0) {
+            alert("Remove a different amount");
+            playerMove();
+        } else {
+            pickArray[2] = pickArray[2] - remove;
+        }
     }
-
-      if (c < 0) {
-
-      var remove2 = prompt("Remove a smaller amount");
-      var remove3 = parseInt(remove2);
-      var newC = c + pan;
-      alert(newC);
-      console.log("c: " + newC);
-      var c = newC - remove3;
-      alert("a: " + a + " b: " + b + " c: " + c);
-      console.log("c: " + c);
-}
 }
 
+function computerMove() {
 
-console.log("a: " + a)
-console.log("b: " + b)
-console.log("c: " + c)
-/*if ((a === 0) && (b === 0) && (c == 0)) {
-  alert("You Win!");
+    if (pickArray[0] == 0 && pickArray[1] == 0) {
+        return pickArray[2] = 0;
+    } else if (pickArray[0] == 0 && pickArray[2] == 0) {
+        return pickArray[1] = 0;
+    } else if (pickArray[1] == 0 && pickArray[2] == 0) {
+        return pickArray[0] = 0;
+    } else {
+        var computerRemove = Math.random();
+        var indexToPick = Math.floor(computerRemove * (pickArray.length));
+        var amountToRemove = Math.ceil(computerRemove * (pickArray[indexToPick]));
+        if (pickArray[indexToPick] == 0) {
+            computerMove();
+        } else {
+            return pickArray[indexToPick] = pickArray[indexToPick] - amountToRemove;
+        }
+    }
+}
 
+function checkIfGameOver() {
+    if (pickArray[0] == 0 && pickArray[1] == 0 && pickArray[2] == 0) {
+        gameOver = true;
+    }
 }
-if (((a === 0) && (b === 0)) || ((a === 0) && (c === 0)) || ((b === 0) && (c === 0))) {
-  alert("Computer Wins")
-  break
-}
-*/
