@@ -22,7 +22,7 @@ while (gameOver == false) {
 
 function playerMove() {
 
-    var move = prompt(`Enter a pile and letter (a3,b2,etc.) --- Current pile count: a:${pickArray[0]} b:${pickArray[1]} c: ${pickArray[2]}`);
+    var move = prompt(`Enter a pile and letter (a3,b2,etc.) --- Current pile count: a: ${pickArray[0]} b: ${pickArray[1]} c: ${pickArray[2]}`);
     var remove = parseInt(move[1]);
     if (move == "") {
         alert("Remove a different amount");
